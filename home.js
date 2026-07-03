@@ -46,3 +46,8 @@ subCont.addEventListener("click",(e)=>{
         renderEntries();
     }
 });
+let logoutBtn= document.querySelector("#logoutBtn");
+logoutBtn.addEventListener("click", ()=>{
+    localStorage.removeItem("loggedInUser");
+    window.location.href = "index.html"; 
+});
