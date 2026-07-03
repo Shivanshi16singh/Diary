@@ -1,53 +1,59 @@
-let addBtn= document.querySelector("#addEntryBtn");
-let newDiv= document.querySelector(".enterNew");
-let form= document.querySelector(".enterNew form");
-let textInput= document.querySelector("#text");
-let dateInput= document.querySelector("#date");
-let subCont= document.querySelector("#submtCont");
-let entries= [];
-addBtn.addEventListener("click",()=>{
-    newDiv.classList.toggle("show");
+let logBtn= document.querySelector("#login");
+let regBtn= document.querySelector("#register");
+let logSub= document.querySelector("#loginSubmit");
+let regSub= document.querySelector("#registerSubmit");
+let userLogin= document.querySelector("#loginUsername");
+let pswLogin= document.querySelector("#loginPassword");
+let userReg= document.querySelector("#regUsername");
+let pswReg= document.querySelector("#regPassword");
+let username;
+let password;
+let users= JSON.parse(localStorage.getItem("journalUsers")) || {};
+let logCont= document.querySelector(".logCont");
+let regCont= document.querySelector(".regCont");
+logBtn.addEventListener("click",()=>{
+    logCont.classList.add("show");
+    regCont.classList.remove("show");
 });
-form.addEventListener("submit",(e)=>{
+regBtn.addEventListener("click",()=>{
+    regCont.classList.add("show");
+    logCont.classList.remove("show");
+});
+document.addEventListener("click",(e)=>{
+    if (!e.target.closest(".regCont") && !e.target.closest(".logCont") && e.target !== logBtn && e.target !== regBtn){
+        logCont.classList.remove("show");
+        regCont.classList.remove("show");
+    }
+});
+regSub.addEventListener("click",(e)=>{
     e.preventDefault();
-    let txt= textInput.value.trim();
-    let date= dateInput.value;
-    if(txt===""||date===""){
-        alert("Please fill in both text and date.");
+    let newUser= userReg.value.trim();
+    let newPsw= pswReg.value;
+    if(newUser === "" || newPsw === ""){
+        alert("Please fill in both username and password.");
         return;
     }
-    entries.push({text:txt,date:date});
-    textInput.value="";
-    dateInput.value="";
-    newDiv.classList.remove("show");
-    renderEntries();
+    if(users.hasOwnProperty(newUser)){
+        alert("Username already exists! Please choose another.");
+        return;}    }
+    users[newUser]=newPsw;
+    localStorage.setItem("journalUsers", JSON.stringify(users));
+    userReg.value="";
+    pswReg.value="";
+    alert("Registered successfully! You can now log in.");
 });
-function renderEntries(){
-    subCont.innerHTML="";
-    entries.forEach((entry, index)=>{
-        let card= document.createElement("div");
-        card.classList.add("entryCard");
-        card.innerHTML=`
-            <div class="newValue">
-                <div class="showDate">${entry.date}</div>
-                <div class="showTxt">${entry.text}</div>
-            </div>
-            <div class="btnGp">
-                <button class="newBtn deleteBtn" dataIndex="${index}">Delete</button>
-            </div>
-        `;
-        subCont.appendChild(card);
-    });
-}
-subCont.addEventListener("click",(e)=>{
-    if (e.target.classList.contains("deleteBtn")) {
-        let index= e.target.getAttribute("dataIndex");
-        entries.splice(index, 1);
-        renderEntries();
+logSub.addEventListener("click",(e)=>{
+    e.preventDefault();
+    username= userLogin.value.trim();
+    password= pswLogin.value;
+    if (!users.hasOwnProperty(username)){
+        alert("Username not found! Kindly Register");
+        return;
     }
-});
-let logoutBtn= document.querySelector("#logoutBtn");
-logoutBtn.addEventListener("click", ()=>{
-    localStorage.removeItem("loggedInUser");
-    window.location.href = "index.html"; 
+    if(users[username]===password){
+        localStorage.setItem("loggedInUser",username); 
+        window.location.href= "home.html";
+    }else{
+        alert("Incorrect password. Please try again.");
+    }
 });
