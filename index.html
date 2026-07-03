@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Journal Book</title>
+    <link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Almendra:ital,wght@0,400;0,700;1,400;1,700&family=Fascinate+Inline&family=Risque&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Risque&display=swap" rel="stylesheet">
+<link href="home.html">
+<link rel="shortcut icon" href="journaling.png" type="image/x-icon">
+</head>
+<body>
+    <div class="mainCont"> 
+        <div class="gallery">
+            <div>
+                <img src="images (1).jpg" alt="img1" class="img">
+                <img src="images (2).jpg" alt="img2" class="img">
+                <img src="images 3.jpg" alt="img3" class="img">
+            </div>
+            <div>
+                <img src="images 4.jpg" alt="img4" class="img">
+                <img src="images 5.jpg" alt="img5" class="img">
+                <img src="images (6).jpg" alt="img6" class="img">
+            </div>
+            <div>
+                <img src="images (7).jpg" alt="img7" class="img">
+                <img src="images 8.jpg" alt="img8" class="img">
+                <img src="images 9.jpg" alt="img9" class="img">
+            </div>
+        </div>
+        <aside class="sidebar">
+            <h1 id="mainHead">My Journal</h1>
+            <form>
+                <input type="button" value="Login" class="btnHome" id="login"> <br/>
+                <input type="button" value="Register" class="btnHome" id="register">
+            </form>
+        </aside>
+        <div class="regCont">
+            <h2> Register </h2>
+            <label for="username">Username: </label>
+            <input type="text" placeholder="Enter your Username" class="input" id="regUsername">
+            <label for="psw">Password: </label>
+            <input type="password" placeholder="Enter your password" id="regPassword" class="input">              
+            <input type="submit" value="Register" class="submit" id="registerSubmit">
+        </div>
+        <div class="logCont">
+            <h2> Login </h2>
+            <label for="username">Username: </label>
+            <input type="text" placeholder="Enter your Username" id="loginUsername" class="input">
+            <label for="psw">Password : </label>
+            <input type="password" placeholder="Enter your password" id="loginPassword" class="input">             
+            <input type="submit" value="Login" class="submit" id="loginSubmit">            
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
